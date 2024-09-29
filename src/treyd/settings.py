@@ -30,6 +30,10 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+CUSTOM_APPS = [
+    "users",
+]
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -37,7 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-]
+] + CUSTOM_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -68,7 +72,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "treyd.wsgi.application"
-
+AUTH_USER_MODEL = 'users.User'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
