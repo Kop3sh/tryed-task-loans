@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 CUSTOM_APPS = [
     "users",
+    "loans",
 ]
 
 INSTALLED_APPS = [
