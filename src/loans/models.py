@@ -1,4 +1,5 @@
 from django.db import models
+from decimal import Decimal
 
 REQUEST_STATUS = (
     ('pending', 'Pending'),
@@ -10,7 +11,7 @@ REQUEST_STATUS = (
 
 
 def validate_term(value):
-    if value % 0.5 != 0:
+    if value % Decimal(0.5) != 0:
         raise ValueError('Term of loan cannot be a fraction other than 0.5')
 
 class LoanRequest(models.Model):
