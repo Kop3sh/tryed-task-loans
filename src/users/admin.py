@@ -27,15 +27,7 @@ class UserModelAdmin(UserAdmin):
     )
     fieldsets = (
         ("General", {"fields": ("email",
-                                "phone_number",
-                                "first_name",
-                                "last_name",
                                 "birth_date",
-                                "height",
-                                "weight",
-                                "gender",
-                                "lang",
-                                "payments_id",
                                 "password")}),
         (
             "Permissions",
@@ -64,7 +56,7 @@ class UserModelAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email','first_name','last_name','password1', 'password2', 'is_staff', )}
+            'fields': ('email','password1', 'password2', 'is_staff', )}
         ),
     )
     def clean(self):
