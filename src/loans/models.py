@@ -23,3 +23,9 @@ class LoanRequest(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        permissions = [
+            ("can_approve_loan", "Can approve loan request"),
+            ("can_reject_loan", "Can reject loan request"),
+        ]

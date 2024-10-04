@@ -10,3 +10,12 @@ class OwnsOrIsAdmin(permissions.BasePermission):
             return True
 
         return obj.user == request.user
+    
+class IsOwner(permissions.BasePermission):
+    """
+    Object-level permission to only allow owners of an object to view it.
+    Assumes the model instance has an `user` attribute.
+    """
+
+    def has_object_permission(self, request, view, obj):
+        return obj.user == request.user
