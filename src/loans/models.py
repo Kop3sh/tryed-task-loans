@@ -24,6 +24,7 @@ class LoanRequest(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    # For finer grain control, we could use Django's permission system
     class Meta:
         permissions = [
             ("can_approve_loan", "Can approve loan request"),
