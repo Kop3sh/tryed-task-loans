@@ -7,7 +7,7 @@ services:
       - "8000:8000"
     volumes:
       - ./src:/src
-    command: sh -c "python3 manage.py migrate --noinput && python3 manage.py collectstatic --noinput && python manage.py runserver 0.0.0.0:8000"
+    # command: sh -c "python3 manage.py migrate --noinput && python3 manage.py collectstatic --noinput && python manage.py runserver 0.0.0.0:8000"
 
     environment:
       - SECRET_KEY=${SECRET_KEY}

@@ -44,22 +44,23 @@ CUSTOM_APPS = [
     "loans",
 ]
 
-PACKAGES = [
-    "rest_framework",
-    'rest_framework_simplejwt',
-]
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    # whitenoise is used to serve static files in production/ development
+    "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
-] + PACKAGES + CUSTOM_APPS
+    # DRF set-up and JWT Authentication
+    "rest_framework",
+    "rest_framework_simplejwt",
+] + CUSTOM_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -170,6 +171,13 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
 
+STORAGES = {
+    "staticfiles": {
+        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+        # "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -181,9 +189,20 @@ USE_I18N = True
 
 USE_TZ = True
 
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = DEBUG
+# SECURITY 
+if not DEBUG:
+    # security.W016
+    # # security.W012
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
+    SECURE_SSL_REDIRECT = True
+    CORS_ORIGIN_ALLOW_ALL = True
+else:
+    CSRF_COOKIE_SECURE = False
+    SESSION_COOKIE_SECURE = False
+    SECURE_SSL_REDIRECT = False
+    CORS_ORIGIN_ALLOW_ALL = False
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
