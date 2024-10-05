@@ -171,12 +171,7 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
 
-STORAGES = {
-    "staticfiles": {
-        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
-        # "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
-    },
-}
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
