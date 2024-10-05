@@ -16,6 +16,8 @@ import os
 
 from dotenv import load_dotenv
 
+from .utils import str_to_bool
+
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -30,7 +32,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY", "")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG") in ("true", "True")
+DEBUG = str_to_bool(os.getenv("DEBUG"))
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(",")
 
@@ -129,14 +131,14 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
-    "ROTATE_REFRESH_TOKENS": False,
-    "BLACKLIST_AFTER_ROTATION": False,
-    "UPDATE_LAST_LOGIN": True,
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=int(os.getenv("ACCESS_TOKEN_LIFETIME"))),
+    "REFRESH_TOKEN_LIFETIME": timedelta(minutes=int(os.getenv("REFRESH_TOKEN_LIFETIME"))),
+    "ROTATE_REFRESH_TOKENS": str_to_bool(os.getenv("ROTATE_REFRESH_TOKENS")),
+    "BLACKLIST_AFTER_ROTATION": str_to_bool(os.getenv("BLACKLIST_AFTER_ROTATION")),
+    "UPDATE_LAST_LOGIN": str_to_bool(os.getenv("UPDATE_LAST_LOGIN")),
 
-    "ALGORITHM": "HS256",
-    "SIGNING_KEY": SECRET_KEY,
+    "ALGORITHM": os.getenv("ALGORITHM"),
+    "SIGNING_KEY": os.getenv("SIGNING_KEY", SECRET_KEY),
     "VERIFYING_KEY": None,
     "AUDIENCE": None,
     "ISSUER": None,
