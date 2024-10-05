@@ -195,12 +195,10 @@ if not DEBUG:
     # # security.W012
     CSRF_COOKIE_SECURE = True
     SESSION_COOKIE_SECURE = True
-    SECURE_SSL_REDIRECT = True
     CORS_ORIGIN_ALLOW_ALL = True
 else:
     CSRF_COOKIE_SECURE = False
     SESSION_COOKIE_SECURE = False
-    SECURE_SSL_REDIRECT = False
     CORS_ORIGIN_ALLOW_ALL = False
 
 # Static files (CSS, JavaScript, Images)
