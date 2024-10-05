@@ -37,3 +37,22 @@ def test_auth_user_cannot_list_all_loan_requests(auth_client, test_loan_request)
     res = auth_client.get(loan_endpoint)
 
     assert res.status_code == 403
+
+def test_auth_user_cannot_create_an_approved_loan(auth_client):
+    res = auth_client.post(loan_endpoint, data={"amount": 1000, "term": 30, "status": "approved"})
+
+    query = LoanRequest.objects.all()
+
+    assert res.status_code == 201
+    assert query.count() == 1
+    assert query.first().status == 'pending'
+
+def test_auth_user_cannot_create_loan_for_other_usres(auth_client, test_other_user):
+    res = auth_client.post(loan_endpoint, data={"amount": 1000, "term": 30, "user": test_other_user.pk})
+
+    query = LoanRequest.objects.all()
+
+    assert res.status_code == 201
+    assert query.count() == 1
+    assert query.first().user.pk == 1
+    assert test_other_user.pk != 1
