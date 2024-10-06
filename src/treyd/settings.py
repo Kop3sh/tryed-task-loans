@@ -184,17 +184,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-# SECURITY 
-if not DEBUG:
-    # security.W016
-    # # security.W012
-    CSRF_COOKIE_SECURE = True
-    SESSION_COOKIE_SECURE = True
-    CORS_ORIGIN_ALLOW_ALL = True
-else:
-    CSRF_COOKIE_SECURE = False
-    SESSION_COOKIE_SECURE = False
-    CORS_ORIGIN_ALLOW_ALL = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
