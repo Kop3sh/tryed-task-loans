@@ -22,3 +22,8 @@ services:
       - BLACKLIST_AFTER_ROTATION=${BLACKLIST_AFTER_ROTATION}
       - UPDATE_LAST_LOGIN=${UPDATE_LAST_LOGIN}
       - ALGORITHM=${ALGORITHM}
+    command: >
+      sh -c "python3 manage.py makemigrations &&
+             python3 manage.py migrate --noinput &&
+             python3 manage.py collectstatic --noinput &&
+             gunicorn --bind :8000 --workers 2 -k uvicorn.workers.UvicornWorker treyd.asgi:application"
