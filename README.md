@@ -1,13 +1,20 @@
 # crispy-enigma
 
+# SETUP
+
+1. make sure that docker is installed and running
+2. fill the .env file with relevant values
+3. run `docker compse up --build -d`
+4. open the web API on 127.0.0.1
+
 # TODOS:
 
 - [] test api endpoints and permissions
   - [x] create endpoint (any user can create loan request, serializer read-only fields)
   - [x] list all loan request (only admin can list all loan requests)
   - [x] retrieve single loan request detail (loan request owner or admin)
-  - [] update and delete (only loan request owner, only pending requests)
-  - [] approve/ reject loan request (admin only, cannot update other fields)
-- [] Github actions
+  - [x] update and delete (only loan request owner, only pending requests)
+  - [x] approve/ reject loan request (admin only, cannot update other fields)
+- [x] Github actions
 - [x] deploy on railway
-- [] loan amortized schedule sheet
+- [x] loan amortized schedule sheet
