@@ -45,7 +45,7 @@ class LoanRequestDetail(generics.RetrieveUpdateDestroyAPIView):
     
     def get(self, request, *args, **kwargs):
         instance = self.get_object()
-        if instance and instance.status == 'pending':
+        if instance and instance.status == 'pending' and not request.user.is_staff:
             return Response({'status': 'cannot view pending loan request'}, status=status.HTTP_400_BAD_REQUEST)
         return super().get(request, *args, **kwargs)
 

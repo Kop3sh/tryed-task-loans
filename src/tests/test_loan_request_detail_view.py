@@ -14,11 +14,15 @@ def test_unauth_user_cannot_get_loan_request_detail(client, test_loan_request):
     assert res.status_code == 401
 
 def test_auth_user_can_get_his_own_approved_loan_request_details(auth_client, test_loan_request):
+    loan = LoanRequest.objects.all().first()
+    loan.status = "approved"
+    loan.save()
+
     res = auth_client.get(loan_endpoint + "1/")
 
-    LoanRequest.objects.all().first().status = "approved"
 
     assert LoanRequest.objects.all().count() == 1
+    assert loan.status == "approved"
     assert res.status_code == 200
     assert Decimal(res.data["amount"]) == test_loan_request.amount
     assert Decimal(res.data["term"]) == test_loan_request.term
