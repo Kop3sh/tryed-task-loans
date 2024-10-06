@@ -5,7 +5,9 @@
 1. make sure that docker is installed and running
 2. fill the .env file with relevant values
 3. run `docker compse up --build -d`
-4. open the web API on 127.0.0.1
+4. run `docker exec -it crispy-enigma-web-1 sh`
+5. run `python manage.py createsuperuser` to have access to db
+6. open the web API on 127.0.0.1
 
 # TODOS:
 
