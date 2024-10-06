@@ -135,10 +135,10 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=int(os.getenv("ACCESS_TOKEN_LIFETIME"))),
     "REFRESH_TOKEN_LIFETIME": timedelta(minutes=int(os.getenv("REFRESH_TOKEN_LIFETIME"))),
     "ROTATE_REFRESH_TOKENS": str_to_bool(os.getenv("ROTATE_REFRESH_TOKENS")),
-    "BLACKLIST_AFTER_ROTATION": str_to_bool(os.getenv("BLACKLIST_AFTER_ROTATION")),
-    "UPDATE_LAST_LOGIN": str_to_bool(os.getenv("UPDATE_LAST_LOGIN")),
+    "BLACKLIST_AFTER_ROTATION": str_to_bool(os.getenv("BLACKLIST_AFTER_ROTATION", False)),
+    "UPDATE_LAST_LOGIN": str_to_bool(os.getenv("UPDATE_LAST_LOGIN", True)),
 
-    "ALGORITHM": os.getenv("ALGORITHM"),
+    "ALGORITHM": os.getenv("ALGORITHM", "HS256"),
     "SIGNING_KEY": os.getenv("SIGNING_KEY", SECRET_KEY),
     "VERIFYING_KEY": None,
     "AUDIENCE": None,

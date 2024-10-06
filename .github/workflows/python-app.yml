@@ -13,8 +13,20 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  qa:
     runs-on: ubuntu-latest
+
+    env:
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+      DEBUG: ${{ secrets.DEBUG }}
+      SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+      ACCESS_TOKEN_LIFETIME: ${{ secrets.ACCESS_TOKEN_LIFETIME }}
+      REFRESH_TOKEN_LIFETIME: ${{ secrets.REFRESH_TOKEN_LIFETIME }}
+      ROTATE_REFRESH_TOKENS: ${{ secrets.ROTATE_REFRESH_TOKENS }}
+      BLACKLIST_AFTER_ROTATION: ${{ secrets.BLACKLIST_AFTER_ROTATION }}
+      UPDATE_LAST_LOGIN: ${{ secrets.UPDATE_LAST_LOGIN }}
+      ALGORITHM: ${{ secrets.ALGORITHM }}
 
     steps:
       - uses: actions/checkout@v4
