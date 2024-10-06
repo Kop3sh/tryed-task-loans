@@ -17,10 +17,8 @@ COPY requirements.txt /requirements.txt
 RUN pip3 install -r /requirements.txt --no-cache-dir
 COPY ./src /src
 
-# RUN chmod R +x run.sh
-# CMD ["run.sh"]
-ENTRYPOINT ["python3"] 
-CMD ["manage.py", "runserver", "0.0.0.0:8000"]
+# ENTRYPOINT ["python3"] 
+# CMD ["manage.py", "runserver", "0.0.0.0:8000"]
 # CMD ["gunicorn", "--bind", ":8000", "--workers", "2", "-k", "uvicorn.workers.UvicornWorker", "treyd.asgi:application"]
 
 # FROM builder as dev-envs
