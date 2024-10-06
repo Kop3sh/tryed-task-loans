@@ -12,6 +12,7 @@ services:
     environment:
       - SECRET_KEY=${SECRET_KEY}
       - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+      - CSRF_TRUSTED_ORIGINS=${CSRF_TRUSTED_ORIGINS}
       - DEBUG=${DEBUG}
 
       - SIGNING_KEY=${SIGNING_KEY}
