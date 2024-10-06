@@ -1,15 +1,27 @@
 # syntax=docker/dockerfile:1.4
 
-FROM --platform=$BUILDPLATFORM python:3.12-alpine AS builder
+FROM --platform=$BUILDPLATFORM python:3.12 AS builder
 EXPOSE 8000
 WORKDIR /src
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    postgresql-client \
+    build-essential \
+    postgresql \
+    postgresql-contrib \
+    libpq-dev \
+    gettext
+
 COPY requirements.txt /requirements.txt
 RUN pip3 install -r /requirements.txt --no-cache-dir
 COPY ./src /src
 
-# ENTRYPOINT ["python3"] 
-# CMD ["manage.py", "runserver", "0.0.0.0:8000"]
-CMD ["gunicorn", "--bind", ":8000", "--workers", "2", "-k", "uvicorn.workers.UvicornWorker", "treyd.asgi:application"]
+# RUN chmod R +x run.sh
+# CMD ["run.sh"]
+ENTRYPOINT ["python3"] 
+CMD ["manage.py", "runserver", "0.0.0.0:8000"]
+# CMD ["gunicorn", "--bind", ":8000", "--workers", "2", "-k", "uvicorn.workers.UvicornWorker", "treyd.asgi:application"]
 
 # FROM builder as dev-envs
 # RUN <<EOF
