@@ -72,6 +72,8 @@ class LoanRequestStatusUpdate(generics.UpdateAPIView):
 def loan_amortization_schedule(request):
     # Get the user’s loan data from the database
     loan_data = get_object_or_404(LoanRequest, user_id=request.user.id)
+    if loan_data.status != 'approved':
+        return Response({'status': 'cannot generate loan schedule for unapproved loan request'}, status=status.HTTP_400_BAD_REQUEST)
 
     # Load the template workbook
     template_path = settings.BASE_DIR / 'templates' / 'loan-amortization-schedule_template.xlsx'
