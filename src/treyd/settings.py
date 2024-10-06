@@ -97,7 +97,7 @@ AUTH_USER_MODEL = 'users.User'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3" if ENVIRONMENT == "development" else os.getenv("DATABASE_NAME"),
     }
 }
 
