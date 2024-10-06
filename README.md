@@ -9,5 +9,5 @@
   - [] update and delete (only loan request owner, only pending requests)
   - [] approve/ reject loan request (admin only, cannot update other fields)
 - [] Github actions
-- [] deploy on fly.io
+- [x] deploy on railway
 - [] loan amortized schedule sheet
